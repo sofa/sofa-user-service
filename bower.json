@@ -1,0 +1,25 @@
+{
+  "name": "sofa-user-service",
+  "version": "0.1.0",
+  "homepage": "http://www.sofa.io",
+  "authors": [
+    "Pascal Precht <pascal@couchcommerce.com>"
+  ],
+  "description": "Sofa Web SDK user service component.",
+  "main": "dist/sofa.userService.js",
+  "dependencies": {
+      "sofa-core": "~0.1.x",
+      "sofa-storages": "0.2.x"
+  },
+  "devDependencies": {
+      "sofa-testing": "0.1.x"
+  },
+  "keywords": [
+    "sofa",
+    "sofa.io",
+    "web",
+    "sdk",
+    "service"
+  ],
+  "license": "GPL"
+}
