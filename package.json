@@ -1,6 +1,6 @@
 {
   "name": "sofa-user-service",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Sofa Web SDK user service component.",
   "main": "dist/sofa.userService.js",
   "scripts": {
