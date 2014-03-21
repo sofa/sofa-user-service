@@ -1,3 +1,11 @@
+/**
+ * sofa-user-service - v0.1.2 - 2014-03-21
+ * http://www.sofa.io
+ *
+ * Copyright (c) 2013 CouchCommerce GmbH (http://www.couchcommerce.org) and other contributors
+ * THIS SOFTWARE CONTAINS COMPONENTS OF THE SOFA SDK (SOFA.IO).
+ * IT IS PROVIDED UNDER THE LICENSE TERMS OF THE ATTACHED LICENSE.TXT.
+ */
 ;(function (sofa, undefined) {
 
 'use strict';
