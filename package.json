@@ -3,6 +3,7 @@
   "version": "0.1.1",
   "description": "Sofa Web SDK user service component.",
   "main": "dist/sofa.userService.js",
+  "homepage": "http://www.sofa.io",
   "scripts": {
     "test": "grunt build"
   },
