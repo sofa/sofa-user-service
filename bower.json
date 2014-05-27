@@ -8,11 +8,14 @@
   "description": "Sofa Web SDK user service component.",
   "main": "dist/sofa.userService.js",
   "dependencies": {
-      "sofa-core": "~0.1.x",
-      "sofa-storages": "0.2.x"
+    "sofa-core": "0.7.x",
+    "sofa-storages": "0.2.x",
+    "sofa-q-service": "0.1.x",
+    "sofa-http-service": "0.3.x"
   },
   "devDependencies": {
-      "sofa-testing": "0.1.x"
+    "sofa-testing": "0.1.x",
+    "jasmine.async": "~0.1.0"
   },
   "keywords": [
     "sofa",

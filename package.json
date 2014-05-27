@@ -28,8 +28,10 @@
     "url": "https://github.com/sofa/sofa-user-service/issues"
   },
   "dependencies": {
-    "sofa-core": "0.1.x",
-    "sofa-storages": "0.2.x"
+    "sofa-core": "0.7.x",
+    "sofa-storages": "0.2.x",
+    "sofa-q-service": "0.1.x",
+    "sofa-http-service": "0.3.x"
   },
   "devDependencies": {
     "grunt": "~0.4.3",
@@ -49,7 +51,7 @@
     "grunt-cli": "~0.1.13",
     "karma": "~0.12.0",
     "grunt-conventional-changelog": "~1.1.0",
-    "sofa-testing": "0.1.x",
+    "sofa-testing": "0.5.x",
     "karma-jasmine": "~0.1.5",
     "karma-chrome-launcher": "~0.1.2",
     "karma-firefox-launcher": "~0.1.3"
