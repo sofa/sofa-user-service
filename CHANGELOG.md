@@ -1,3 +1,12 @@
+<a name="0.2.1"></a>
+### 0.2.1 (2014-05-28)
+
+
+#### Bug Fixes
+
+* **sofa.UserService:** fixes sofa-core dep resolution ([9595d0e0](https://github.com/sofa/sofa-user-service/commit/9595d0e035e78b7374440637d48cab5c0e1eecd9))
+
+
 <a name="0.2.0"></a>
 ## 0.2.0 (2014-05-28)
 
