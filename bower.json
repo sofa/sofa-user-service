@@ -13,6 +13,9 @@
     "sofa-q-service": "0.1.x",
     "sofa-http-service": "0.3.x"
   },
+  "resolutions": {
+    "sofa-core": "0.7.x"
+  },
   "devDependencies": {
     "sofa-testing": "0.1.x",
     "jasmine.async": "~0.1.0"
