@@ -1,3 +1,12 @@
+<a name="0.2.0"></a>
+## 0.2.0 (2014-05-28)
+
+
+#### Features
+
+* **sofa.userService:** implements method for customer integration ([b1d53d86](https://github.com/sofa/sofa-user-service/commit/b1d53d86423a9304c1a21b7a3c7242b11b1396bc))
+
+
 <a name="0.1.3"></a>
 ### 0.1.3 (2014-04-16)
 
