@@ -11,8 +11,13 @@ module.exports = function (karma) {
         files: [
             'node_modules/sofa-core/dist/sofa.core.js',
             'node_modules/sofa-storages/dist/sofa.storages.js',
+            'node_modules/sofa-q-service/dist/sofa.qService.js',
             'src/**/*.js',
             'node_modules/sofa-testing/mocks/sofa.config.mock.js',
+            'bower_components/jasmine.async/src/jasmine.async.js',
+            'node_modules/sofa-testing/helpers/md5.js',
+            'node_modules/sofa-testing/mocks/sofa.config.mock.js',
+            'node_modules/sofa-testing/mocks/sofa.httpService.mock.js',
             'test/**/*.spec.js'
         ],
         exclude: [],
