@@ -53,6 +53,18 @@ describe('sofa.userService', function () {
         expect(userService.getEmail).toBeDefined();
     });
 
+    it('should have a method hasExistingAddress', function () {
+        expect(userService.hasExistingAddress).toBeDefined();
+    });
+
+    it('should have a method hasExistingShippingAddress', function () {
+        expect(userService.hasExistingShippingAddress).toBeDefined();
+    });
+
+    it('should have a method hasExistingInvoiceAddress', function () {
+        expect(userService.hasExistingInvoiceAddress).toBeDefined();
+    });
+
     describe('sofa.UserService#getEmail', function () {
 
         it('should be a function', function () {
@@ -188,6 +200,17 @@ describe('sofa.userService', function () {
                 expect(userService.isLoggedIn()).toBe(false);
                 done();
             });
+        });
+    });
+
+    describe('sofa.UserService#hasExistingAddress', function () {
+
+        it('should be a function', function () {
+            expect(typeof userService.hasExistingAddress).toBe('function');
+        });
+
+        it('should return a boolean', function () {
+            expect(typeof userService.hasExistingAddress()).toBe('boolean');
         });
     });
 
