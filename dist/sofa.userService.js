@@ -1,5 +1,5 @@
 /**
- * sofa-user-service - v0.2.1 - 2014-05-28
+ * sofa-user-service - v0.3.0 - 2014-06-20
  * http://www.sofa.io
  *
  * Copyright (c) 2014 CouchCommerce GmbH (http://www.couchcommerce.com / http://www.sofa.io) and other contributors
@@ -55,7 +55,7 @@ sofa.define('sofa.UserService', function (storageService, configService, httpSer
 
     /**
      * @method updateInvoiceAddress
-     * @memberof sofa.Updates
+     * @memberof sofa.UserService
      *
      * @description
      * Creates/Updates the invoice address for the user.
@@ -64,6 +64,50 @@ sofa.define('sofa.UserService', function (storageService, configService, httpSer
      */
     self.updateInvoiceAddress = function (invoiceAddress) {
         return storageService.set(STORE_INVOICE_ADDRESS_KEY, invoiceAddress);
+    };
+
+    /**
+     * @method hasExistingAddress
+     * @memberof sofa.UserService
+     *
+     * @description
+     * Checks if a given address by `type` exists in used storage.
+     * A.k.a. Did the user already buy something so we have an address
+     * we can propose for the next buy?
+     *
+     * @param {string} type Storage key for either invoice or shipping address
+     * @returns {bool}
+     */
+    self.hasExistingAddress = function (type) {
+        return !!(storageService.get(type));
+    };
+
+    /**
+     * @method hasExistingShippingAddress
+     * @memberof sofa.UserService
+     *
+     * @description
+     * Wraps `hasExistingAddress`. Syntactic sugar method
+     * to check for existing shipping address.
+     *
+     * @returns {bool} True if there's an existing shipping address
+     */
+    self.hasExistingShippingAddress = function () {
+        return self.hasExistingAddress(STORE_SHIPPING_ADDRESS_KEY);
+    };
+
+    /**
+     * @method hasExistingInvoiceAddress
+     * @memberof sofa.UserService
+     *
+     * @description
+     * Wraps `hasExistingAddress`. Syntactic sugar method
+     * to check for existing invoice address.
+     *
+     * @returns {bool} True if there's an existing invoice address
+     */
+    self.hasExistingInvoiceAddress = function () {
+        return self.hasExistingAddress(STORE_INVOICE_ADDRESS_KEY);
     };
 
     /**

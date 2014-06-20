@@ -1,3 +1,12 @@
+<a name="0.3.0"></a>
+## 0.3.0 (2014-06-20)
+
+
+#### Features
+
+* **sofa.UserService:** adds address specific methods ([2adbb8c4](https://github.com/sofa/sofa-user-service/commit/2adbb8c48df92ffa9e5355d946d163a81773dc61))
+
+
 <a name="0.2.1"></a>
 ### 0.2.1 (2014-05-28)
 
