@@ -1,3 +1,12 @@
+<a name="0.4.0"></a>
+## 0.4.0 (2014-06-23)
+
+
+#### Features
+
+* **grunt:** better deploying ([5cf2f93c](https://github.com/sofa/sofa-user-service/commit/5cf2f93c73e7eb3fc553041694fbca7c07c36262))
+
+
 <a name="0.3.0"></a>
 ## 0.3.0 (2014-06-20)
 
