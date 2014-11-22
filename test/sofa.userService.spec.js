@@ -21,12 +21,12 @@ describe('sofa.userService', function () {
         expect(userService).toBeDefined();
     });
 
-    it('should have a method getInvoiceAddress', function () {
-        expect(userService.getInvoiceAddress).toBeDefined();
+    it('should have a method getBillingAddress', function () {
+        expect(userService.getBillingAddress).toBeDefined();
     });
 
-    it('should have a method updateInvoiceAddress', function () {
-        expect(userService.updateInvoiceAddress).toBeDefined();
+    it('should have a method updateBillingAddress', function () {
+        expect(userService.updateBillingAddress).toBeDefined();
     });
 
     it('should have a method getShippingAddress', function () {
@@ -61,8 +61,8 @@ describe('sofa.userService', function () {
         expect(userService.hasExistingShippingAddress).toBeDefined();
     });
 
-    it('should have a method hasExistingInvoiceAddress', function () {
-        expect(userService.hasExistingInvoiceAddress).toBeDefined();
+    it('should have a method hasExistingBillingAddress', function () {
+        expect(userService.hasExistingBillingAddress).toBeDefined();
     });
 
     describe('sofa.UserService#getEmail', function () {
@@ -214,20 +214,36 @@ describe('sofa.userService', function () {
         });
     });
 
-    describe('sofa.UserService#getInvoiceAddress', function () {
+    describe('sofa.UserService#getBillingAddress', function () {
+
+        afterEach(function () {
+            storageService.clear();
+        });
 
         it('should be a function', function () {
-            expect(typeof userService.getInvoiceAddress).toBe('function');
+            expect(typeof userService.getBillingAddress).toBe('function');
         });
 
-        it('should return an object', function () {
-            expect(typeof userService.getInvoiceAddress()).toBe('object');
+        it('should return undefined if no address is present', function () {
+            expect(userService.getBillingAddress()).toBeUndefined();
         });
 
-        it('should return address object', function () {
-            var address = userService.getInvoiceAddress();
+        it('should return an object if an address is present', function () {
+            userService.updateBillingAddress({
+                country: 'bar'
+            });
+
+            expect(typeof userService.getBillingAddress()).toBe('object');
+        });
+
+        it('should return an address object', function () {
+            userService.updateBillingAddress({
+                country: 'foo'
+            });
+
+            var address = userService.getBillingAddress();
             expect(address.country).toBeDefined();
-            expect(address.country).toEqual(configService.getDefaultCountry());
+            expect(address.country).toEqual('foo');
         });
     });
 
@@ -237,7 +253,7 @@ describe('sofa.userService', function () {
             expect(typeof userService.getAddresses).toBe('function');
         });
 
-        it('should throw an arrow when user is not logged in', function () {
+        it('should throw an error when user is not logged in', function () {
             expect(function () {
                 userService.getAddresses();
             }).toThrow('Can\'t access addresses, user is not logged in!');
@@ -275,40 +291,54 @@ describe('sofa.userService', function () {
         });
     });
 
-    describe('sofa.UserService#updateInvoiceAddress', function () {
+    describe('sofa.UserService#updateBillingAddress', function () {
 
         afterEach(function () {
             storageService.clear();
         });
 
         it('should be a function', function () {
-            expect(typeof userService.updateInvoiceAddress).toBe('function');
+            expect(typeof userService.updateBillingAddress).toBe('function');
         });
 
         it('should update invoice address', function () {
-            userService.updateInvoiceAddress({
+            userService.updateBillingAddress({
                 country: 'foo'
             });
-            var updatedInvoiceAddress = storageService.get('basketService_invoiceAddress');
-            expect(updatedInvoiceAddress).toBeDefined();
-            expect(updatedInvoiceAddress.country).toEqual('foo');
+            var updatedBillingAddress = userService.getBillingAddress();
+            expect(updatedBillingAddress).toBeDefined();
+            expect(updatedBillingAddress.country).toEqual('foo');
         });
     });
 
     describe('sofa.UserService#getShippingAddress', function () {
 
+        afterEach(function () {
+            storageService.clear();
+        });
+
         it('should be a function', function () {
             expect(typeof userService.getShippingAddress).toBe('function');
         });
 
-        it('should return an object', function () {
+        it('should return undefined if no address is present', function () {
+            expect(userService.getShippingAddress()).toBeUndefined();
+        });
+
+        it('should return an object if an address is present', function () {
+            userService.updateShippingAddress({
+                country: 'foo'
+            });
             expect(typeof userService.getShippingAddress()).toBe('object');
         });
 
-        it('should return shipping address', function () {
+        it('should return a shipping address', function () {
+            userService.updateShippingAddress({
+                country: 'foo'
+            });
             var address = userService.getShippingAddress();
             expect(address.country).toBeDefined();
-            expect(address.country).toEqual(configService.getDefaultCountry());
+            expect(address.country).toEqual('foo');
         });
     });
 
@@ -324,11 +354,11 @@ describe('sofa.userService', function () {
 
         it('should update shipping address', function () {
             userService.updateShippingAddress({
-                country: 'foo'
+                country: 'bar'
             });
-            var updatedShippingAddress = storageService.get('basketService_shippingAddress');
+            var updatedShippingAddress = userService.getShippingAddress();
             expect(updatedShippingAddress).toBeDefined();
-            expect(updatedShippingAddress.country).toEqual('foo');
+            expect(updatedShippingAddress.country).toEqual('bar');
         });
     });
 });

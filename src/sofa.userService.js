@@ -12,48 +12,37 @@ sofa.define('sofa.UserService', function (storageService, configService, httpSer
 
     var self = {},
         FORM_DATA_HEADERS = {'Content-Type': 'application/x-www-form-urlencoded'},
-        STORE_PREFIX = 'basketService_',
-        STORE_INVOICE_ADDRESS_KEY = STORE_PREFIX + 'invoiceAddress',
-        STORE_SHIPPING_ADDRESS_KEY = STORE_PREFIX + 'shippingAddress',
-        STORE_LOGGED_IN_USER_KEY = STORE_PREFIX + 'loggedInUser',
+        STORE_BILLING_ADDRESS_KEY = 'billingAddress',
+        STORE_SHIPPING_ADDRESS_KEY = 'shippingAddress',
+        STORE_LOGGED_IN_USER_KEY = 'loggedInUser',
         loginEndpoint = configService.get('apiEndpoint') + 'customers/login',
         storeCode = configService.get('storeCode'),
         loggedInUser = null;
 
     /**
-     * @method getInvoiceAddress
+     * @method getBillingAddress
      * @memberof sofa.UserService
      *
      * @description
-     * Gets the invoice address for the user.
+     * Gets the billing address for the user.
      *
      * @return {object} address Address object.
      */
-    self.getInvoiceAddress = function () {
-        var address = storageService.get(STORE_INVOICE_ADDRESS_KEY);
-
-        if (!address) {
-            address = {
-                country: configService.getDefaultCountry()
-            };
-
-            self.updateInvoiceAddress(address);
-        }
-
-        return address;
+    self.getBillingAddress = function () {
+        return storageService.get(STORE_BILLING_ADDRESS_KEY);
     };
 
     /**
-     * @method updateInvoiceAddress
+     * @method updateBillingAddress
      * @memberof sofa.UserService
      *
      * @description
-     * Creates/Updates the invoice address for the user.
+     * Creates/Updates the billing address for the user.
      *
-     * @param {object} invoiceAddress Invoice address object.
+     * @param {object} billingAddress Billing address object.
      */
-    self.updateInvoiceAddress = function (invoiceAddress) {
-        return storageService.set(STORE_INVOICE_ADDRESS_KEY, invoiceAddress);
+    self.updateBillingAddress = function (billingAddress) {
+        return storageService.set(STORE_BILLING_ADDRESS_KEY, billingAddress);
     };
 
     /**
@@ -65,7 +54,7 @@ sofa.define('sofa.UserService', function (storageService, configService, httpSer
      * A.k.a. Did the user already buy something so we have an address
      * we can propose for the next buy?
      *
-     * @param {string} type Storage key for either invoice or shipping address
+     * @param {string} type Storage key for either billing or shipping address
      * @returns {bool}
      */
     self.hasExistingAddress = function (type) {
@@ -87,17 +76,17 @@ sofa.define('sofa.UserService', function (storageService, configService, httpSer
     };
 
     /**
-     * @method hasExistingInvoiceAddress
+     * @method hasExistingBillingAddress
      * @memberof sofa.UserService
      *
      * @description
      * Wraps `hasExistingAddress`. Syntactic sugar method
-     * to check for existing invoice address.
+     * to check for existing billing address.
      *
-     * @returns {bool} True if there's an existing invoice address
+     * @returns {bool} True if there's an existing billing address
      */
-    self.hasExistingInvoiceAddress = function () {
-        return self.hasExistingAddress(STORE_INVOICE_ADDRESS_KEY);
+    self.hasExistingBillingAddress = function () {
+        return self.hasExistingAddress(STORE_BILLING_ADDRESS_KEY);
     };
 
     /**
@@ -110,16 +99,7 @@ sofa.define('sofa.UserService', function (storageService, configService, httpSer
      * @return {object} shipping address object.
      */
     self.getShippingAddress = function () {
-        var address = storageService.get(STORE_SHIPPING_ADDRESS_KEY);
-
-        if (!address) {
-            address = {
-                country: configService.getDefaultCountry()
-            };
-            self.updateInvoiceAddress(address);
-        }
-
-        return address;
+        return storageService.get(STORE_SHIPPING_ADDRESS_KEY);
     };
 
     /**
@@ -129,10 +109,10 @@ sofa.define('sofa.UserService', function (storageService, configService, httpSer
      * @description
      * Creates/Updates the shipping address for the user.
      *
-     * @param {object} invoiceAddress
+     * @param {object} shippingAddress
      */
-    self.updateShippingAddress = function (invoiceAddress) {
-        return storageService.set(STORE_SHIPPING_ADDRESS_KEY, invoiceAddress);
+    self.updateShippingAddress = function (shippingAddress) {
+        return storageService.set(STORE_SHIPPING_ADDRESS_KEY, shippingAddress);
     };
 
     /**
