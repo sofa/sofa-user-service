@@ -28,10 +28,10 @@
         "url": "https://github.com/sofa/sofa-user-service/issues"
     },
     "dependencies": {
-        "sofa-core": "0.7.x",
-        "sofa-storages": "0.2.x",
-        "sofa-q-service": "0.1.x",
-        "sofa-http-service": "0.3.x"
+        "sofa-core": "0.13.x",
+        "sofa-storages": "0.4.x",
+        "sofa-q-service": "0.3.x",
+        "sofa-http-service": "0.5.x"
     },
     "devDependencies": {
         "grunt": "~0.4.3",
