@@ -1,5 +1,5 @@
 /**
- * sofa-user-service - v0.5.0 - 2014-12-08
+ * sofa-user-service - v0.5.0 - 2015-02-10
  * http://www.sofa.io
  *
  * Copyright (c) 2014 CouchCommerce GmbH (http://www.couchcommerce.com / http://www.sofa.io) and other contributors
@@ -122,14 +122,7 @@ sofa.define('sofa.UserService', function (storageService, configService, httpSer
     self.getShippingAddress = function () {
         var address = storageService.get(STORE_SHIPPING_ADDRESS_KEY);
 
-        if (!address) {
-            address = {
-                country: configService.getDefaultCountry()
-            };
-            self.updateInvoiceAddress(address);
-        }
-
-        return address;
+        return address || {};
     };
 
     /**

@@ -112,14 +112,7 @@ sofa.define('sofa.UserService', function (storageService, configService, httpSer
     self.getShippingAddress = function () {
         var address = storageService.get(STORE_SHIPPING_ADDRESS_KEY);
 
-        if (!address) {
-            address = {
-                country: configService.getDefaultCountry()
-            };
-            self.updateInvoiceAddress(address);
-        }
-
-        return address;
+        return address || {};
     };
 
     /**

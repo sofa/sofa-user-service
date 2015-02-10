@@ -307,8 +307,7 @@ describe('sofa.userService', function () {
 
         it('should return shipping address', function () {
             var address = userService.getShippingAddress();
-            expect(address.country).toBeDefined();
-            expect(address.country).toEqual(configService.getDefaultCountry());
+            expect(address).toBeDefined();
         });
     });
 
