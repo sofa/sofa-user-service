@@ -1,3 +1,12 @@
+<a name="0.5.1"></a>
+### 0.5.1 (2015-02-10)
+
+
+#### Bug Fixes
+
+* ***:** don't fill shipping address with default country ([c1fac757](https://github.com/sofa/sofa-user-service/commit/c1fac75775572faa8c88a38a6f1aea1ce51d18ca))
+
+
 <a name="0.5.0"></a>
 ## 0.5.0 (2014-12-08)
 
