@@ -27,9 +27,10 @@ sofa.define('sofa.UserService', function (storageService, configService, httpSer
      * @description
      * Gets the invoice address for the user.
      *
+     * @param {Number} maxAge optionally parameter to specify accepted max age of user data
      * @return {object} address Address object.
      */
-    self.getInvoiceAddress = function () {
+    self.getInvoiceAddress = function (maxAge) {
         var address = storageService.get(STORE_INVOICE_ADDRESS_KEY);
 
         if (!address) {
@@ -38,9 +39,11 @@ sofa.define('sofa.UserService', function (storageService, configService, httpSer
             };
 
             self.updateInvoiceAddress(address);
+
+            return address;
         }
 
-        return address;
+        return sofa.LeasedObject.deserialize(address).unwrap(maxAge) || {};
     };
 
     /**
@@ -53,7 +56,7 @@ sofa.define('sofa.UserService', function (storageService, configService, httpSer
      * @param {object} invoiceAddress Invoice address object.
      */
     self.updateInvoiceAddress = function (invoiceAddress) {
-        return storageService.set(STORE_INVOICE_ADDRESS_KEY, invoiceAddress);
+        return storageService.set(STORE_INVOICE_ADDRESS_KEY, new sofa.LeasedObject(invoiceAddress).serialize());
     };
 
     /**
@@ -107,12 +110,13 @@ sofa.define('sofa.UserService', function (storageService, configService, httpSer
      * @description
      * Gets the shipping address for the user.
      *
+     * @param {Number} maxAge optionally parameter to specify accepted max age of user data
      * @return {object} shipping address object.
      */
-    self.getShippingAddress = function () {
-        var address = storageService.get(STORE_SHIPPING_ADDRESS_KEY);
+    self.getShippingAddress = function (maxAge) {
+        var lease = storageService.get(STORE_SHIPPING_ADDRESS_KEY);
 
-        return address || {};
+        return lease ? sofa.LeasedObject.deserialize(lease).unwrap(maxAge) || {} : {};
     };
 
     /**
@@ -125,7 +129,7 @@ sofa.define('sofa.UserService', function (storageService, configService, httpSer
      * @param {object} invoiceAddress
      */
     self.updateShippingAddress = function (invoiceAddress) {
-        return storageService.set(STORE_SHIPPING_ADDRESS_KEY, invoiceAddress);
+        return storageService.set(STORE_SHIPPING_ADDRESS_KEY, new sofa.LeasedObject(invoiceAddress).serialize());
     };
 
     /**

@@ -1,5 +1,5 @@
 /**
- * sofa-user-service - v0.5.1 - 2015-02-10
+ * sofa-user-service - v0.5.1 - 2015-02-18
  * http://www.sofa.io
  *
  * Copyright (c) 2014 CouchCommerce GmbH (http://www.couchcommerce.com / http://www.sofa.io) and other contributors
@@ -8,6 +8,81 @@
  */
 ;(function (sofa, undefined) {
 
+'use strict';
+/* global sofa */
+/**
+ * @name LeasedData
+ * @namespace sofa.LeasedData
+ *
+ * @description
+ * The `LeasedData` is used to wrap any object with a time stamp and only provide access to it within a given lease time.
+ */
+sofa.define('sofa.LeasedObject', function (data, timestamp) {
+
+    var self = {},
+        then = timestamp || new Date().getTime();
+
+    /**
+     * @method unwrap
+     * @memberof sofa.LeasedObject
+     *
+     * @description
+     * Returns the underlying data if it's still within the specified lease time
+     *
+     * @param {maxAgeMinutes} The maximum age of the data in minutes. Infinite if not specified.
+     * @return {object} The data object
+     */
+    self.unwrap = function (maxAgeMinutes) {
+        if (sofa.Util.isUndefined(maxAgeMinutes)) {
+            return data;
+        }
+
+        return isMaxMinutesOld(then, maxAgeMinutes) ? data : null;
+    };
+
+    /**
+     * @method serialize
+     * @memberof sofa.LeasedObject
+     *
+     * @description
+     * Returns a representation that can be stored as a string and later be deserialized into a `sofa.LeaseObject` again.
+     *
+     * @return {object} the serialized object
+     */
+    self.serialize = function () {
+        return {
+            data: data,
+            timestamp: then
+        };
+    };
+
+    var toMinutes = function (timestamp) {
+        return Math.floor(timestamp / 1000 / 60);
+    };
+
+    var isMaxMinutesOld = function (timestamp, maxMinutes) {
+        var dateInMinutes = toMinutes(timestamp),
+            nowInMinutes  = toMinutes(new Date().getTime());
+
+        return nowInMinutes - dateInMinutes <= maxMinutes;
+    };
+
+    return self;
+});
+
+
+/**
+ * @method deserialize
+ * @memberof sofa.LeasedObject
+ *
+ * @description
+ * Static method that deserializes a serialized leased object into a proper `sofa.LeasedObject` instance again
+ *
+ * @return {object} the sofa.LeasedObject instance
+ */
+sofa.LeasedObject.deserialize = function (wrapper) {
+    return new sofa.LeasedObject(wrapper.data, wrapper.timestamp);
+};
 'use strict';
 /* global sofa */
 /**
@@ -37,9 +112,10 @@ sofa.define('sofa.UserService', function (storageService, configService, httpSer
      * @description
      * Gets the invoice address for the user.
      *
+     * @param {Number} maxAge optionally parameter to specify accepted max age of user data
      * @return {object} address Address object.
      */
-    self.getInvoiceAddress = function () {
+    self.getInvoiceAddress = function (maxAge) {
         var address = storageService.get(STORE_INVOICE_ADDRESS_KEY);
 
         if (!address) {
@@ -48,9 +124,11 @@ sofa.define('sofa.UserService', function (storageService, configService, httpSer
             };
 
             self.updateInvoiceAddress(address);
+
+            return address;
         }
 
-        return address;
+        return sofa.LeasedObject.deserialize(address).unwrap(maxAge) || {};
     };
 
     /**
@@ -63,7 +141,7 @@ sofa.define('sofa.UserService', function (storageService, configService, httpSer
      * @param {object} invoiceAddress Invoice address object.
      */
     self.updateInvoiceAddress = function (invoiceAddress) {
-        return storageService.set(STORE_INVOICE_ADDRESS_KEY, invoiceAddress);
+        return storageService.set(STORE_INVOICE_ADDRESS_KEY, new sofa.LeasedObject(invoiceAddress).serialize());
     };
 
     /**
@@ -117,12 +195,13 @@ sofa.define('sofa.UserService', function (storageService, configService, httpSer
      * @description
      * Gets the shipping address for the user.
      *
+     * @param {Number} maxAge optionally parameter to specify accepted max age of user data
      * @return {object} shipping address object.
      */
-    self.getShippingAddress = function () {
-        var address = storageService.get(STORE_SHIPPING_ADDRESS_KEY);
+    self.getShippingAddress = function (maxAge) {
+        var lease = storageService.get(STORE_SHIPPING_ADDRESS_KEY);
 
-        return address || {};
+        return lease ? sofa.LeasedObject.deserialize(lease).unwrap(maxAge) || {} : {};
     };
 
     /**
@@ -135,7 +214,7 @@ sofa.define('sofa.UserService', function (storageService, configService, httpSer
      * @param {object} invoiceAddress
      */
     self.updateShippingAddress = function (invoiceAddress) {
-        return storageService.set(STORE_SHIPPING_ADDRESS_KEY, invoiceAddress);
+        return storageService.set(STORE_SHIPPING_ADDRESS_KEY, new sofa.LeasedObject(invoiceAddress).serialize());
     };
 
     /**

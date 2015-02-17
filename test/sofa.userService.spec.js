@@ -289,7 +289,7 @@ describe('sofa.userService', function () {
             userService.updateInvoiceAddress({
                 country: 'foo'
             });
-            var updatedInvoiceAddress = storageService.get('basketService_invoiceAddress');
+            var updatedInvoiceAddress = userService.getInvoiceAddress();
             expect(updatedInvoiceAddress).toBeDefined();
             expect(updatedInvoiceAddress.country).toEqual('foo');
         });
@@ -325,7 +325,7 @@ describe('sofa.userService', function () {
             userService.updateShippingAddress({
                 country: 'foo'
             });
-            var updatedShippingAddress = storageService.get('basketService_shippingAddress');
+            var updatedShippingAddress = userService.getShippingAddress();
             expect(updatedShippingAddress).toBeDefined();
             expect(updatedShippingAddress.country).toEqual('foo');
         });
