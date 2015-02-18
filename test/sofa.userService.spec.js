@@ -292,6 +292,10 @@ describe('sofa.userService', function () {
             var updatedInvoiceAddress = userService.getInvoiceAddress();
             expect(updatedInvoiceAddress).toBeDefined();
             expect(updatedInvoiceAddress.country).toEqual('foo');
+
+            userService.updateInvoiceAddress();
+            updatedInvoiceAddress = userService.getInvoiceAddress();
+            expect(updatedInvoiceAddress).toEqual({});
         });
     });
 
@@ -328,6 +332,10 @@ describe('sofa.userService', function () {
             var updatedShippingAddress = userService.getShippingAddress();
             expect(updatedShippingAddress).toBeDefined();
             expect(updatedShippingAddress.country).toEqual('foo');
+
+            userService.updateShippingAddress();
+            updatedShippingAddress = userService.getShippingAddress();
+            expect(updatedShippingAddress).toEqual({});
         });
     });
 });
