@@ -1,11 +1,11 @@
 'use strict';
 /* global sofa */
 /**
- * @name LeasedData
- * @namespace sofa.LeasedData
+ * @name LeasedObject
+ * @namespace sofa.LeasedObject
  *
  * @description
- * The `LeasedData` is used to wrap any object with a time stamp and only provide access to it within a given lease time.
+ * The `LeasedObject` is used to wrap any object with a time stamp and only provide access to it within a given lease time.
  */
 sofa.define('sofa.LeasedObject', function (data, timestamp) {
 
