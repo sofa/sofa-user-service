@@ -1,3 +1,12 @@
+<a name="0.6.0"></a>
+## 0.6.0 (2015-02-18)
+
+
+#### Features
+
+* **userService:** allow specifying maxAge for address getters ([8117a1d3](https://github.com/sofa/sofa-user-service/commit/8117a1d3096661cf39cd90f8cc79e57455969c96))
+
+
 <a name="0.5.1"></a>
 ### 0.5.1 (2015-02-10)
 
