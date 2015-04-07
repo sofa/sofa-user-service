@@ -6,15 +6,15 @@
         "Pascal Precht <pascal@couchcommerce.com>"
     ],
     "description": "Sofa Web SDK user service component.",
-    "main": "dist/sofa.userService.js",
+    "main": "dist/sofaUserService.js",
     "dependencies": {
-        "sofa-core": "0.13.x",
-        "sofa-storages": "0.4.x",
+        "sofa-core": "0.15.1",
+        "sofa-storages": "0.5.x",
         "sofa-q-service": "0.3.x",
-        "sofa-http-service": "0.5.x"
+        "sofa-http-service": "0.6.x"
     },
     "resolutions": {
-        "sofa-core": "0.13.x"
+        "sofa-core": "0.15.1"
     },
     "devDependencies": {
         "sofa-testing": "0.7.x",

@@ -2,10 +2,10 @@
     "name": "sofa-user-service",
     "version": "0.6.0",
     "description": "Sofa Web SDK user service component.",
-    "main": "dist/sofa.userService.js",
+    "main": "dist/sofaUserService.js",
     "homepage": "http://www.sofa.io",
     "scripts": {
-        "test": "bower install && grunt build"
+        "test": "gulp build"
     },
     "engines": {
         "node": ">=0.10.x",
@@ -28,34 +28,14 @@
         "url": "https://github.com/sofa/sofa-user-service/issues"
     },
     "dependencies": {
-        "sofa-core": "0.13.x",
-        "sofa-storages": "0.4.x",
+        "sofa-core": "0.15.1",
+        "sofa-storages": "0.5.x",
         "sofa-q-service": "0.3.x",
-        "sofa-http-service": "0.5.x"
+        "sofa-http-service": "0.6.x"
     },
     "devDependencies": {
-        "grunt": "~0.4.3",
-        "grunt-contrib-uglify": "~0.2.4",
-        "grunt-html2js": "~0.1.4",
-        "grunt-contrib-concat": "~0.3.0",
-        "grunt-contrib-copy": "~0.5.0",
-        "grunt-contrib-jshint": "~0.8.0",
-        "load-grunt-tasks": "~0.2.1",
-        "grunt-karma": "~0.8.0",
-        "grunt-contrib-cssmin": "~0.7.0",
-        "grunt-ngmin": "0.0.3",
-        "grunt-contrib-watch": "~0.5.3",
-        "grunt-contrib-clean": "~0.5.0",
-        "lodash": "~2.4.1",
-        "grunt-contrib-sass": "~0.7.2",
-        "grunt-cli": "~0.1.13",
-        "karma": "~0.12.0",
-        "bower": "~1.2.8",
-        "grunt-conventional-changelog": "~1.1.0",
-        "sofa-testing": "0.5.x",
-        "karma-jasmine": "~0.1.5",
-        "karma-chrome-launcher": "~0.1.2",
-        "karma-firefox-launcher": "~0.1.3",
-        "grunt-deploy-semver": "^0.3.0"
+        "gulp": "^3.8.10",
+        "shared-sofa-component-tasks": "^0.11.0",
+        "sofa-testing": "^0.8.0"
     }
 }

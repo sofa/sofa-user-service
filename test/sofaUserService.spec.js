@@ -1,6 +1,5 @@
 'use strict';
 /* global sofa */
-/* global AsyncSpec */
 
 describe('sofa.userService', function () {
 
@@ -74,14 +73,13 @@ describe('sofa.userService', function () {
         it('should return throw exception if user is not logged in', function () {
             expect(function () {
                 userService.getEmail();
-            }).toThrow('Can\'t access email address, user is not logged in!');
+            }).toThrowError('Can\'t access email address, user is not logged in!');
         });
     });
 
     describe('sofa.UserService#isLoggedIn', function () {
 
-        var async = new AsyncSpec(this),
-            configService = new sofa.ConfigService(),
+        var configService = new sofa.ConfigService(),
             storageService = new sofa.MemoryStorageService(),
             httpService = createHttpService(),
             userService = new sofa.UserService(storageService, configService, httpService, new sofa.QService());
@@ -94,7 +92,7 @@ describe('sofa.userService', function () {
             expect(typeof userService.isLoggedIn()).toBe('boolean');
         });
 
-        async.it('should return email of logged in user', function (done) {
+        it('should return email of logged in user', function (done) {
 
             var loginEndpoint = configService.get('apiEndpoint') + 'customers/login';
 
@@ -121,8 +119,7 @@ describe('sofa.userService', function () {
 
     describe('sofa.UserService#login', function () {
 
-        var async = new AsyncSpec(this),
-            configService = new sofa.ConfigService(),
+        var configService = new sofa.ConfigService(),
             storageService = new sofa.MemoryStorageService(),
             httpService = createHttpService(),
             userService = new sofa.UserService(storageService, configService, httpService, new sofa.QService());
@@ -135,7 +132,7 @@ describe('sofa.userService', function () {
             expect(userService.login().then).toBeDefined();
         });
 
-        async.it('should login a user', function (done) {
+        it('should login a user', function (done) {
             storageService.clear();
 
             var loginEndpoint = configService.get('apiEndpoint') + 'customers/login';
@@ -167,8 +164,7 @@ describe('sofa.userService', function () {
 
     describe('sofa.UserService#logout', function () {
 
-        var async = new AsyncSpec(this),
-            configService = new sofa.ConfigService(),
+        var configService = new sofa.ConfigService(),
             httpService = createHttpService(),
             storageService = new sofa.MemoryStorageService(),
             userService = new sofa.UserService(storageService, configService, httpService, new sofa.QService());
@@ -177,7 +173,7 @@ describe('sofa.userService', function () {
             expect(typeof userService.logout).toBe('function');
         });
 
-        async.it('should logout a user', function (done) {
+        it('should logout a user', function (done) {
 
             var loginEndpoint = configService.get('apiEndpoint') + 'customers/login';
 
@@ -240,17 +236,16 @@ describe('sofa.userService', function () {
         it('should throw an arrow when user is not logged in', function () {
             expect(function () {
                 userService.getAddresses();
-            }).toThrow('Can\'t access addresses, user is not logged in!');
+            }).toThrowError('Can\'t access addresses, user is not logged in!');
         });
 
-        var async = new AsyncSpec(this),
-            configService = new sofa.ConfigService(),
+        var configService = new sofa.ConfigService(),
             httpService = createHttpService(),
             storageService = new sofa.MemoryStorageService(),
             userService = new sofa.UserService(storageService, configService, httpService, new sofa.QService());
 
 
-        async.it('should return an array', function (done) {
+        it('should return an array', function (done) {
             var loginEndpoint = configService.get('apiEndpoint') + 'customers/login';
 
             var user = {

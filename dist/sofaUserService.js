@@ -1,21 +1,20 @@
 /**
- * sofa-user-service - v0.6.0 - 2015-02-18
+ * sofa-user-service - v0.7.0 - Wed Apr 08 2015 13:40:54 GMT+0200 (CEST)
  * http://www.sofa.io
  *
  * Copyright (c) 2014 CouchCommerce GmbH (http://www.couchcommerce.com / http://www.sofa.io) and other contributors
- * THIS SOFTWARE CONTAINS COMPONENTS OF THE SOFA.IO COUCHCOMMERCE SDK (WWW.SOFA.IO).
+ * THIS SOFTWARE CONTAINS COMPONENTS OF THE SOFA.IO COUCHCOMMERCE SDK (WWW.SOFA.IO)
  * IT IS PROVIDED UNDER THE LICENSE TERMS OF THE ATTACHED LICENSE.TXT.
  */
-;(function (sofa, undefined) {
-
+;(function (sofa, document, undefined) {
 'use strict';
 /* global sofa */
 /**
- * @name LeasedData
- * @namespace sofa.LeasedData
+ * @name LeasedObject
+ * @namespace sofa.LeasedObject
  *
  * @description
- * The `LeasedData` is used to wrap any object with a time stamp and only provide access to it within a given lease time.
+ * The `LeasedObject` is used to wrap any object with a time stamp and only provide access to it within a given lease time.
  */
 sofa.define('sofa.LeasedObject', function (data, timestamp) {
 
@@ -322,5 +321,4 @@ sofa.define('sofa.UserService', function (storageService, configService, httpSer
 
     return self;
 });
-
-} (sofa));
+}(sofa, document));
