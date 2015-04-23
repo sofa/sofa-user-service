@@ -1,19 +1,23 @@
 {
     "name": "sofa-user-service",
     "version": "0.7.0",
+    "homepage": "http://www.sofa.io",
+    "authors": [
+        "Pascal Precht <pascal@couchcommerce.com>"
+    ],
     "description": "Sofa Web SDK user service component.",
     "main": "dist/sofaUserService.js",
-    "homepage": "http://www.sofa.io",
-    "scripts": {
-        "test": "gulp build"
+    "dependencies": {
+        "sofa-core": "0.15.1",
+        "sofa-storages": "0.5.x",
+        "sofa-q-service": "0.3.x",
+        "sofa-http-service": "0.6.x"
     },
-    "engines": {
-        "node": ">=0.10.x",
-        "npm": ">=1.2.x"
+    "resolutions": {
+        "sofa-core": "0.15.1"
     },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/sofa/sofa-user-service"
+    "devDependencies": {
+        "sofa-testing": "0.7.x"
     },
     "keywords": [
         "sofa",
@@ -22,20 +26,5 @@
         "sdk",
         "service"
     ],
-    "author": "Pascal Precht <pascal@couchcommerce.com>",
-    "license": "GPL",
-    "bugs": {
-        "url": "https://github.com/sofa/sofa-user-service/issues"
-    },
-    "dependencies": {
-        "sofa-core": "0.15.1",
-        "sofa-storages": "0.5.x",
-        "sofa-q-service": "0.3.x",
-        "sofa-http-service": "0.6.x"
-    },
-    "devDependencies": {
-        "gulp": "^3.8.10",
-        "shared-sofa-component-tasks": "^0.11.0",
-        "sofa-testing": "^0.8.0"
-    }
+    "license": "GPL"
 }
